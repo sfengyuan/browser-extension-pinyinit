@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Pinyin It</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+      padding: 0.5rem;
+    }
+
+    #whitelist-label {
+      padding: 1rem 0;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 1rem;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="panel">
+    <header class="panel-section panel-section-header">
+      <div class="text-section-header">Style</div>
+    </header>
+
+    <div class="panel-section">
+      <label for="style">Default
+        <input type="radio" name="style" value="default" id="default" checked /></label>
+
+    </div>
+    <div class="panel-section">
+      <label for="style">number
+        <input type="radio" name="style" value="number" id="number" /></label>
+    </div>
+    <div class="panel-section">
+      <label for="style">No marks
+        <input type="radio" name="style" value="nomark" id="nomark" /></label>
+    </div>
+    <header class="panel-section panel-section-header">
+      <div class="text-section-header">Whitelist</div>
+    </header>
+    <div class="panel-section">
+      <label for="whitelist" id="whitelist-label">Hint: Charaters won't be pinyinized, input as whatever format you like, e.g. 得地的...</label>
+    </div>
+    <div class="panel-section">
+      <textarea name="whitelist" id="whitelist"></textarea>
+    </div>
+    <footer class="panel-section panel-section-footer">
+      <button id="apply">Save</button>
+    </footer>
+  </div>
+  <script src="options.js"></script>
+</body>
+
+</html>

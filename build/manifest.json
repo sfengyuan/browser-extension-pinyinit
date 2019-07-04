@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "name": "Pinyin It",
+  "version": "1.1",
+  "description": "Add pinyin to Chinese characters",
+  "developer": {
+    "name": "Jacob",
+    "url": "https://ziox.xyz"
+  },
+  "icons": {
+    "48": "icons/fan.svg",
+    "96": "icons/fan.svg"
+  },
+  "permissions": [
+    "activeTab", "storage"
+  ],
+  "browser_action": {
+    "default_icon": "icons/fan.svg",
+    "default_title": "Pinyin It"
+  },
+  "background": {
+    "scripts": ["background/background.js"]
+  },
+  "options_ui": {
+    "page": "options/index.html",
+    "browser_style": true
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "faked.jacob.sun.meta@gmail.faked.com"
+    }
+  }
+}

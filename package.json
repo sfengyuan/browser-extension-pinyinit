@@ -1,0 +1,20 @@
+{
+  "name": "pinyin_it",
+  "version": "1.0.0",
+  "description": "A browser extension that add Chinese pinyin to webpage.",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "pack": "npm run build && cd build && zip  -r -FS ../dist/pinyinit.zip *",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jacob",
+  "license": "MIT",
+  "devDependencies": {
+    "rollup": "^1.16.4",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  },
+  "dependencies": {
+    "thepinyin.js": "^1.0.3"
+  }
+}
