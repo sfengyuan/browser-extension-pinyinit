@@ -2,6 +2,10 @@
 
 This is the source code of a browser extension.
 
+# Install
+
+Firefox: https://addons.mozilla.org/firefox/addon/pinyin-it
+
 # How to build
 
 This project is relied on
