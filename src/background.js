@@ -1,8 +1,9 @@
-import { baction, btabs, bstorage } from './api'
-
-let options = {
+import { baction, btabs, bstorage, bruntime, paction } from './api'
+const options = {
   style: 'default', // pinyin style
-  whitelist: '' // dissmissed characters
+  whitelist: '', // dissmissed characters
+  fontSize: 16,
+  hidePageAction: false
 }
 
 bstorage.sync
@@ -10,52 +11,66 @@ bstorage.sync
   .then((res) => {
     options.style = updateValue(res.style, options.style)
     options.whitelist = updateValue(res.whitelist, options.whitelist)
+    options.fontSize = updateValue(res.fontSize, options.fontSize)
+    options.hidePageAction = updateValue(res.hidePageAction, options.hidePageAction)
   })
 
 bstorage.onChanged.addListener((changes, area) => {
   options.style = updateValue(changes.style.newValue, options.style)
   options.whitelist = updateValue(changes.whitelist.newValue, options.whitelist)
+  options.fontSize = updateValue(changes.fontSize.newValue, options.fontSize)
+  options.hidePageAction = updateValue(changes.hidePageAction.newValue, options.hidePageAction)
 })
 
 function updateValue (newValue, oldValue) {
   return newValue && newValue !== oldValue ? newValue : oldValue
 }
 
-baction.onClicked.addListener(() => {
-  injectStyle()
-  injectScript()
+bruntime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.type === 'GET-OPTIONS') {
+    sendResponse({ options })
+  }
 })
 
-function sendApply () {
+baction.onClicked.addListener(() => {
+  injectScript()
+    .then(sendHover)
+    .catch(e => console.log(e))
+})
+paction.onClicked.addListener(tab => {
+  injectScript()
+    .then(() => {
+      sendApply(tab)
+    })
+    .catch(e => console.log(e))
+})
+
+btabs.onCreated.addListener(tab => {
+  if (options.hidePageAction) {
+    paction.hide(tab.id)
+  }
+})
+
+function injectScript () {
+  return btabs.executeScript({ file: '/content_scripts/pinyin_it_content.js' })
+}
+
+function sendHover () {
   btabs.query({ active: true, currentWindow: true })
     .then(tabs => {
       btabs.sendMessage(tabs[0].id, {
-        command: 'apply',
+        type: 'HOVER',
         options
       })
     })
     .catch(err => { console.log(err) })
 }
 
-function injectScript () {
-  btabs.executeScript({ file: '/content_scripts/pinyin_it_content.js' })
-    .then(sendApply)
-    .catch(err => { console.log(err) })
-}
-
-function injectStyle () {
-  const rtStyle = `rt {
-    font-size: 0.8em;
-    background: antiquewhite;
-    color: #000;}
-    ruby {
-      line-height: 3;
-    }
-    body {
-      max-width: 100vw;
-      word-wrap: anywhere;
-    }`
-  btabs.insertCSS({ code: rtStyle })
-    .then(() => {})
-    .catch(err => { console.log(err) })
+function sendApply (tab) {
+  btabs.sendMessage(
+    tab.id,
+    { type: 'APPLY', options }
+  ).then(response => {
+    paction.hide(tab.id)
+  }).catch(e => console.log(e))
 }

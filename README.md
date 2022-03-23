@@ -6,29 +6,11 @@ This is the source code of a browser extension.
 
 Firefox: https://addons.mozilla.org/firefox/addon/pinyin-it
 
-# How to build
+# Usage
 
-This project is relied on
+Mode 1: Click toolbar icon, move cursor on Chinese text.
 
-```
-Linux or Windows subsystem linux
-npm 6.9.0
-node v11.13.0
-```
-
-Donwload or run
-
-```
-git clone git@github.com:jacobsun/browser-extension-pinyinit.git
-
-cd the project
-
-npm install
-
-npm build // produce extension source file
-
-npm pack // build and package source file to zip
-```
+Mode 2: Click address bar icon, all Chinese text will be added pinyin.
 
 # License
 MIT

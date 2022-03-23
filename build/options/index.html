@@ -22,37 +22,56 @@
       width: 100%;
       text-align: center;
     }
+    #panel-section {
+      margin-top: 1rem;
+    }
   </style>
 </head>
 
 <body>
   <div class="panel">
     <header class="panel-section panel-section-header">
-      <div class="text-section-header">Style</div>
+      <div class="text-section-header">Tone Mark Style</div>
     </header>
 
     <div class="panel-section">
-      <label for="style">Default
-        <input type="radio" name="style" value="default" id="default" checked /></label>
+      <label for="style">
+        <input type="radio" class="style-radio" name="style" value="default" id="default" checked />
+        Default
+      </label>
 
     </div>
     <div class="panel-section">
-      <label for="style">number
-        <input type="radio" name="style" value="number" id="number" /></label>
+      <label for="style">
+        <input type="radio" class="style-radio" name="style" value="number" id="number" />
+        Number
+      </label>
     </div>
     <div class="panel-section">
-      <label for="style">No marks
-        <input type="radio" name="style" value="nomark" id="nomark" /></label>
+      <label for="style">
+        <input type="radio" class="style-radio" name="style" value="nomark" id="nomark" />
+        No tone marks
+      </label>
     </div>
+
     <header class="panel-section panel-section-header">
-      <div class="text-section-header">Whitelist</div>
+      <div class="text-section-header">Whitelist (Input characters that you don't need pinyin to be added. e.g. 得地的...)</div>
     </header>
-    <div class="panel-section">
-      <label for="whitelist" id="whitelist-label">Hint: Charaters won't be pinyinized, input as whatever format you like, e.g. 得地的...</label>
-    </div>
     <div class="panel-section">
       <textarea name="whitelist" id="whitelist"></textarea>
     </div>
+
+    <header class="panel-section panel-section-header">
+      <div class="text-section-header">Font Size (in pixels)</div>
+      <input type="range" id="font-size" name="fontSize"
+      min="12" max="99" value="12">
+    </header>
+
+    <header class="panel-section panel-section-header">
+      <div class="text-section-header">Hide Address Bar Icon</div>
+      <input type="checkbox" name="hidePageAction" id="hide-page-action">
+    </header>
+
     <footer class="panel-section panel-section-footer">
       <button id="apply">Save</button>
     </footer>
